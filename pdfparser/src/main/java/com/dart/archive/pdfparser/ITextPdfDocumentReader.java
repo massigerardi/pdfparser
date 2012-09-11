@@ -33,28 +33,30 @@ public class ITextPdfDocumentReader implements PdfDocumentReader {
     /* (non-Javadoc)
 	 * @see com.dart.archive.pdfparser.PdfImageReader#extractImages(java.lang.String, java.lang.String)
 	 */
-	public PdfDocument getPages(String filename) throws DocumentException {
+	public PdfDocument getPages(String filepath) throws DocumentException {
 
-    	File file = new File(filename);
+    	File file = new File(filepath);
         
     	if (outputDir!=null) {
         	File output = new File(outputDir);
         	if (!output.exists()) {
-        		output.mkdir();
+        		output.mkdirs();
         	}
         	outputDir = output.getAbsolutePath();
     	}
     	
     	PdfDocument document;
 		try {
-			PdfReader reader = new PdfReader(filename);
+			PdfReader reader = new PdfReader(filepath);
 
 			PdfReaderContentParser parser = new PdfReaderContentParser(reader);
 			
 			document = new PdfDocument(file.getName(), file);
 			
+			String name = StringUtils.replace(file.getName(), ".pdf", "");
+			
 			for (int i = 1; i <= reader.getNumberOfPages(); i++) {
-				PageRenderer  pageRenderer = new PageRenderer(i, outputDir);
+				PageRenderer  pageRenderer = new PageRenderer(i, outputDir, name);
 			    parser.processContent(i, pageRenderer);
 			    document.addPage(pageRenderer.getPage());
 			}

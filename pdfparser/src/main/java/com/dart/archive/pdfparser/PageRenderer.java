@@ -24,18 +24,25 @@ public class PageRenderer extends SimpleTextExtractionStrategy {
 
 	Page page;
 	boolean doWrite;
-
-	public static final String IMAGE_NAME = "img_%s_%s.%s";
+	String imageName;
+	
+	
+	public static final String IMAGE_NAME = "%s_%s_%s.%s";
     public static final String TEXT_NAME = "text_%s.txt";
 
     private File outputDir;
 
-    /**
-     * Creates a RenderListener that will look for images.
-     * @param path
-     * @param pageNumber 
-     */
-    public PageRenderer(int pageNumber, String path) {
+	/**
+	 * Creates a RenderListener that will look for images.
+	 * @param path
+	 * @param pageNumber 
+	 */
+	public PageRenderer(int pageNumber, String path) {
+		this(pageNumber, path, "img");
+	}
+    public PageRenderer(int pageNumber, String path, String imageName) {
+		super();
+		this.imageName = imageName;
     	this.page = new Page(pageNumber);
         this.doWrite = path!=null;
         if (doWrite) {
@@ -59,7 +66,7 @@ public class PageRenderer extends SimpleTextExtractionStrategy {
 		}
         if (image == null) return;
     	
-        String filename = String.format(IMAGE_NAME, page.getPageNumber(), renderInfo.getRef().getNumber(), image.getFileType());
+        String filename = String.format(IMAGE_NAME, imageName, page.getPageNumber(), renderInfo.getRef().getNumber(), image.getFileType());
     	String filePath = writeImage(filename, image);
         page.addImage(new Image(filename, filePath));
     }

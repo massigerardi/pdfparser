@@ -26,7 +26,7 @@ import com.dart.archive.pdfparser.model.PdfDocument;
 public class ITextPdfDocumentReaderTest {
 
 	String pdfPath = "src/test/resources/learmidellarte.pdf";
-	String destinationDir = "target/testdata";
+	String destinationDir = "target/learmidellarte";
 	PdfDocumentReader reader;
 
 	@Before
