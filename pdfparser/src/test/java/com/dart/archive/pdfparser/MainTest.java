@@ -13,6 +13,7 @@ import org.junit.Test;
 public class MainTest {
 
 	String pdfFolder = "src/test/resources";
+	String pdfFileFolder = "src/test/resources/learmidellarte";
 	String pdfPath = "src/test/resources/learmidellarte.pdf";
 	String pdfDir = "target/test-results/learmidellarte";
 	String destinationDir = "target/test-results";
@@ -33,6 +34,14 @@ public class MainTest {
 		Main.main(new String[] {pdfPath, pdfDir});
 		checkFolder(pdfDir, 58, 57);
 		
+	}
+
+	@Test
+	public void testMainFileNoDestination() throws IOException {
+		Main.main(new String[] {pdfPath});
+		checkFolder(pdfFileFolder, 58, 57);
+		File dest = new File(pdfFileFolder);
+		FileUtils.deleteDirectory(dest);
 	}
 
 	private void checkFolder(String dir, int images, int text) {

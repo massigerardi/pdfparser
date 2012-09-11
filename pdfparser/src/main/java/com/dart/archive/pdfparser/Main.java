@@ -28,19 +28,26 @@ public class Main {
 			return;
 		}
 		String srcName = args[0];
-		String destName = srcName;
+		File dest = null;
+		String destName = null;
 		if (args.length>1) {
 			destName = args[1];
+			dest = new File(destName);
+			if (dest.exists() && !dest.isDirectory()) {
+				throw new RuntimeException(dest.getAbsolutePath()+" must be a directory");
+			}
 		}
 		
-		File dest = new File(destName);
-		if (dest.exists() && !dest.isDirectory()) {
-			throw new RuntimeException(dest.getAbsolutePath()+" must be a directory");
-		}
 		File src = new File(srcName);
 		if (src.exists() && src.isDirectory()) {
+			if (dest==null) {
+				dest = new File(srcName);
+			}
 			readFolder(src,dest);
 		} else if (src.exists()) {
+			if (dest==null) {
+				dest = src.getParentFile();
+			}
 			readFile(src, dest);
 		} else {
 			throw new RuntimeException(src.getAbsolutePath()+" does not exist");
