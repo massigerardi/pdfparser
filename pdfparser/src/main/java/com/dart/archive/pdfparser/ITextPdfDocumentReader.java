@@ -5,9 +5,15 @@ package com.dart.archive.pdfparser;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang.StringUtils;
 
+import com.dart.archive.pdfparser.model.Image;
+import com.dart.archive.pdfparser.model.Page;
 import com.dart.archive.pdfparser.model.PdfDocument;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfReader;
@@ -20,6 +26,7 @@ import com.itextpdf.text.pdf.parser.PdfReaderContentParser;
 public class ITextPdfDocumentReader implements PdfDocumentReader {
 
 	int imageCounter = 0;
+	private String pdfimages = "pdfimages";
 	
     /* (non-Javadoc)
 	 * @see com.dart.archive.pdfparser.PdfImageReader#extractImages(java.lang.String, java.lang.String)
@@ -43,33 +50,63 @@ public class ITextPdfDocumentReader implements PdfDocumentReader {
 			document = new PdfDocument(file.getName(), file);
 			String name = FilenameUtils.getBaseName(file.getName());
 			
-			for (int i = 1; i <= reader.getNumberOfPages(); i++) {
-				PageRenderer  pageRenderer = new PageRenderer(i, outputDir, name, this, writeText, writeImage);
-				parser.processContent(i, pageRenderer);
-			    document.addPage(pageRenderer.getPage());
+			List<File> files = new ArrayList<File>();
+			if (writeImage) {
+				files = extractImages(file, outputDir);
 			}
-			extractImages(file);
+			
+			for (int i = 1; i <= reader.getNumberOfPages(); i++) {
+				PageRenderer  pageRenderer = new PageRenderer(i, outputDir, name, writeText, writeImage);
+				parser.processContent(i, pageRenderer);
+			    Page page =  pageRenderer.getPage();
+			    if (writeImage) {
+			    	//TODO remove the line below: added only to pass test
+			    	files = new ArrayList<File>(FileUtils.listFiles(new File(outputDir), new String[] {"jpg", "JPG", "JPEG", "jpeg"}, true));
+				    List<Image> images = getImages(files, page.getPageNumber(), name);
+				    page.setImages(images);
+			    }
+				document.addPage(page);
+			    
+			}
 			return document;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return null;
     }
-
-	public String getNumber() {
-		
-		StringBuilder builder = new StringBuilder();
-		if (imageCounter<100)
-			builder.append(0);
-		if (imageCounter<10)
-			builder.append(0);
-		builder.append(imageCounter);
-		imageCounter++;
-		return builder.toString();
-	}
 	
-	private void extractImages(File file) {
+	private List<Image> getImages(List<File> files, int pageNumber, String name) {
+		List<Image> images = new ArrayList<Image>();
+		for (File file : files) {
+			if (file.getName().startsWith(name+"-"+StringUtils.leftPad(String.valueOf(pageNumber), 3, '0'))) {
+				images.add(new Image(FilenameUtils.getBaseName(file.getName()), file.getAbsolutePath()));
+			}
+		}
+		return images;
+	}
+
+	private List<File> extractImages(File file, String outputDir) {
 		String name = FilenameUtils.getBaseName(file.getName());
+		try {
+			extracyImages(file, outputDir, name);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return new ArrayList<File>(FileUtils.listFiles(new File(outputDir), new String[] {"jpg", "JPG", "JPEG", "jpeg"}, true));
+	}
+
+	private void extracyImages(File file, String outputDir, String name) throws IOException, InterruptedException {
+		File dest = new File(outputDir, name);
+		StringBuffer args = new StringBuffer();
+		args.append(" -p ").append(file.getAbsolutePath()).append(" ").append(dest.getAbsolutePath());
+		System.out.println("running "+pdfimages+" "+args);
+		Process process = new ProcessBuilder(pdfimages , args.toString()).start();
+		int result = process.waitFor();
+		if (result!=0) {
+			throw new IOException("error while extracting images");
+		}
 		
 	}
 

@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 
 import com.dart.archive.pdfparser.model.Image;
 import com.dart.archive.pdfparser.model.Page;
@@ -26,11 +27,10 @@ public class PageRenderer extends SimpleTextExtractionStrategy {
 	boolean writeImage;
 	boolean writeText;
 	
-	String imageName;
-	ITextPdfDocumentReader reader;
+	String name;
 	
-	public static final String IMAGE_NAME = "%s-%s.%s";
-    public static final String TEXT_NAME = "text_%s.txt";
+	public static final String IMAGE_NAME = "%s-%s-%s.%s";
+    public static final String TEXT_NAME = "%s-%s.txt";
 
     private File outputDir;
 
@@ -39,17 +39,16 @@ public class PageRenderer extends SimpleTextExtractionStrategy {
 	 * @param path
 	 * @param pageNumber 
 	 */
-	public PageRenderer(int pageNumber, String path, ITextPdfDocumentReader reader, boolean writeText, boolean writeImage) {
-		this(pageNumber, path, "img", reader, writeText, writeImage);
+	public PageRenderer(int pageNumber, String path, boolean writeText, boolean writeImage) {
+		this(pageNumber, path, "img", writeText, writeImage);
 	}
 	
-    public PageRenderer(int pageNumber, String path, String imageName, ITextPdfDocumentReader reader, boolean writeText, boolean writeImage) {
+    public PageRenderer(int pageNumber, String path, String name, boolean writeText, boolean writeImage) {
 		super();
-		this.imageName = imageName;
+		this.name = name;
     	this.page = new Page(pageNumber);
     	this.writeImage = writeImage;
     	this.writeText = writeText;
-        this.reader = reader;
         if (path!=null) {
             this.outputDir = new File(path);
             if (!outputDir.exists()) {
@@ -63,7 +62,10 @@ public class PageRenderer extends SimpleTextExtractionStrategy {
      *     com.itextpdf.text.pdf.parser.ImageRenderInfo)
      */
     public void renderImage(ImageRenderInfo renderInfo) {
-        PdfImageObject image = null;
+		if (!writeImage) {
+			return;
+		}
+    	PdfImageObject image = null;
 		try {
 			image = renderInfo.getImage();
 		} catch (IOException e) {
@@ -71,20 +73,18 @@ public class PageRenderer extends SimpleTextExtractionStrategy {
 		}
         if (image == null) return;
     	
-        String filename = String.format(IMAGE_NAME, imageName, reader.getNumber(), image.getFileType());
+        String filename = String.format(IMAGE_NAME, name, StringUtils.leftPad(String.valueOf(page.getPageNumber()), 3, '0'), renderInfo.getRef().getNumber(), image.getFileType());
     	String filePath = writeImage(filename, image);
-        page.addImage(new Image(filename, filePath));
+        //page.addImage(new Image(filename, filePath));
     }
 
 	private String writeImage(String filename, PdfImageObject image) {
     	File file = getFile(filename);
-		if (writeImage) {
-			try {
-				FileUtils.writeByteArrayToFile(file, image.getImageAsBytes());
-			} catch (IOException e) {
-				e.printStackTrace();
-				return null;
-			}
+		try {
+			FileUtils.writeByteArrayToFile(file, image.getImageAsBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
 		}
 		return file.getAbsolutePath();
 	}
@@ -112,7 +112,7 @@ public class PageRenderer extends SimpleTextExtractionStrategy {
 		if (!writeText) {
 			return;
 		}
-    	String filename = String.format(TEXT_NAME, page.getPageNumber());
+    	String filename = String.format(TEXT_NAME, name, StringUtils.leftPad(String.valueOf(page.getPageNumber()), 3, '0'));
     	File file = getFile(filename);
     	try {
     		String text = getResultantText();
