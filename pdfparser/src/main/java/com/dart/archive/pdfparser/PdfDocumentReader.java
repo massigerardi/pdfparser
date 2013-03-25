@@ -15,6 +15,6 @@ public interface PdfDocumentReader {
 	
 	 */
 
-	public PdfDocument getPages(String src) throws DocumentException;
+	public PdfDocument getPages(String src, String dest, boolean writeText, boolean writeImage) throws DocumentException;
 
 }

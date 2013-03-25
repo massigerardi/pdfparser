@@ -3,14 +3,15 @@
  */
 package com.dart.archive.pdfparser;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,8 +38,7 @@ public class ITextPdfDocumentReaderTest {
 	@After
 	public void clean() throws IOException {
 		reader = null;
-		File target = new File(destinationDir);
-		FileUtils.deleteDirectory(target);
+//		FileUtils.deleteDirectory(new File(destinationDir));
 	}
 	
 	/**
@@ -49,7 +49,7 @@ public class ITextPdfDocumentReaderTest {
 	@Test
 	public void testExtractImagesNoWrite() throws Exception {
 		File file = new File(pdfPath);
-		PdfDocument document = reader.getPages(file.getAbsolutePath());
+		PdfDocument document = reader.getPages(file.getAbsolutePath(), null, false, false);
 		assertNotNull(document);
 		assertFalse(document.getPages().isEmpty());
 		assertEquals(64, document.getPages().size());
@@ -74,8 +74,7 @@ public class ITextPdfDocumentReaderTest {
 	public void testExtractImagesWrite() throws Exception {
 		File file = new File(pdfPath);
 		File dir = new File(destinationDir);
-		PdfDocumentReader reader = new ITextPdfDocumentReader(dir.getAbsolutePath());
-		PdfDocument document = reader.getPages(file.getAbsolutePath());
+		PdfDocument document = reader.getPages(file.getAbsolutePath(),dir.getAbsolutePath(), true, true);
 		assertNotNull(document);
 		assertFalse(document.getPages().isEmpty());
 		assertEquals(64, document.getPages().size());
@@ -96,6 +95,8 @@ public class ITextPdfDocumentReaderTest {
 			}
 			for (Image image : page.getImages()) {
 				String path = image.getPath();
+				System.out.println(page.getPageNumber() +" --> "+ path);
+				assertNotNull(path);
 				assertTrue("image file "+path+" for "+page.toString(), new File(path).exists());
 			}
 		}

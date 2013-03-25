@@ -23,11 +23,13 @@ public class PageRenderer extends SimpleTextExtractionStrategy {
 
 
 	Page page;
-	boolean doWrite;
+	boolean writeImage;
+	boolean writeText;
+	
 	String imageName;
+	ITextPdfDocumentReader reader;
 	
-	
-	public static final String IMAGE_NAME = "%s_%s_%s.%s";
+	public static final String IMAGE_NAME = "%s-%s.%s";
     public static final String TEXT_NAME = "text_%s.txt";
 
     private File outputDir;
@@ -37,15 +39,18 @@ public class PageRenderer extends SimpleTextExtractionStrategy {
 	 * @param path
 	 * @param pageNumber 
 	 */
-	public PageRenderer(int pageNumber, String path) {
-		this(pageNumber, path, "img");
+	public PageRenderer(int pageNumber, String path, ITextPdfDocumentReader reader, boolean writeText, boolean writeImage) {
+		this(pageNumber, path, "img", reader, writeText, writeImage);
 	}
-    public PageRenderer(int pageNumber, String path, String imageName) {
+	
+    public PageRenderer(int pageNumber, String path, String imageName, ITextPdfDocumentReader reader, boolean writeText, boolean writeImage) {
 		super();
 		this.imageName = imageName;
     	this.page = new Page(pageNumber);
-        this.doWrite = path!=null;
-        if (doWrite) {
+    	this.writeImage = writeImage;
+    	this.writeText = writeText;
+        this.reader = reader;
+        if (path!=null) {
             this.outputDir = new File(path);
             if (!outputDir.exists()) {
             	outputDir.mkdirs();
@@ -66,21 +71,20 @@ public class PageRenderer extends SimpleTextExtractionStrategy {
 		}
         if (image == null) return;
     	
-        String filename = String.format(IMAGE_NAME, imageName, page.getPageNumber(), renderInfo.getRef().getNumber(), image.getFileType());
+        String filename = String.format(IMAGE_NAME, imageName, reader.getNumber(), image.getFileType());
     	String filePath = writeImage(filename, image);
         page.addImage(new Image(filename, filePath));
     }
 
 	private String writeImage(String filename, PdfImageObject image) {
     	File file = getFile(filename);
-		if (!doWrite) {
-			return null;
-		}
-		try {
-			FileUtils.writeByteArrayToFile(file, image.getImageAsBytes());
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
+		if (writeImage) {
+			try {
+				FileUtils.writeByteArrayToFile(file, image.getImageAsBytes());
+			} catch (IOException e) {
+				e.printStackTrace();
+				return null;
+			}
 		}
 		return file.getAbsolutePath();
 	}
@@ -105,7 +109,7 @@ public class PageRenderer extends SimpleTextExtractionStrategy {
     }
 
 	private void writeText() {
-		if (!doWrite) {
+		if (!writeText) {
 			return;
 		}
     	String filename = String.format(TEXT_NAME, page.getPageNumber());
