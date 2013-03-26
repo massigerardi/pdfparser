@@ -28,6 +28,8 @@ public class ITextPdfDocumentReader implements PdfDocumentReader {
 	int imageCounter = 0;
 	private String pdfimages = "pdfimages";
 	
+	private String pnmtojpeg = "pnmtojpeg";
+	
     /* (non-Javadoc)
 	 * @see com.dart.archive.pdfparser.PdfImageReader#extractImages(java.lang.String, java.lang.String)
 	 */
@@ -60,9 +62,7 @@ public class ITextPdfDocumentReader implements PdfDocumentReader {
 				parser.processContent(i, pageRenderer);
 			    Page page =  pageRenderer.getPage();
 			    if (writeImage) {
-			    	//TODO remove the line below: added only to pass test
-			    	files = new ArrayList<File>(FileUtils.listFiles(new File(outputDir), new String[] {"jpg", "JPG", "JPEG", "jpeg"}, true));
-				    List<Image> images = getImages(files, page.getPageNumber(), name);
+			    	List<Image> images = getImages(files, page.getPageNumber(), name);
 				    page.setImages(images);
 			    }
 				document.addPage(page);
@@ -89,12 +89,36 @@ public class ITextPdfDocumentReader implements PdfDocumentReader {
 		String name = FilenameUtils.getBaseName(file.getName());
 		try {
 			extracyImages(file, outputDir, name);
+			convertImages(outputDir);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		return new ArrayList<File>(FileUtils.listFiles(new File(outputDir), new String[] {"jpg", "JPG", "JPEG", "jpeg"}, true));
+	}
+
+	private void convertImages(String outputDir) {
+		List<File> files = new ArrayList<File>(FileUtils.listFiles(new File(outputDir), new String[] {"ppm", "PPM"}, true));
+		for (File file : files) {
+			File dest = new File(file.getParent(), FilenameUtils.getBaseName(file.getName()) + ".jpg");
+			StringBuffer args = new StringBuffer();
+			args.append(file.getAbsolutePath()).append(" > ").append(dest.getAbsolutePath());
+			Process process;
+			try {
+				process = new ProcessBuilder(pdfimages , args.toString()).start();
+				int result = process.waitFor();
+				if (result!=0) {
+					System.out.println("failed converting "+file.getAbsolutePath());
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	private void extracyImages(File file, String outputDir, String name) throws IOException, InterruptedException {
