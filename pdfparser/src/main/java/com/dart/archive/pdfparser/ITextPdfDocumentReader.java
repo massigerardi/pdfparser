@@ -106,7 +106,7 @@ public class ITextPdfDocumentReader implements PdfDocumentReader {
 			args.append(file.getAbsolutePath()).append(" > ").append(dest.getAbsolutePath());
 			Process process;
 			try {
-				process = new ProcessBuilder(pdfimages , args.toString()).start();
+				process = new ProcessBuilder(pnmtojpeg , args.toString()).start();
 				int result = process.waitFor();
 				if (result!=0) {
 					System.out.println("failed converting "+file.getAbsolutePath());
