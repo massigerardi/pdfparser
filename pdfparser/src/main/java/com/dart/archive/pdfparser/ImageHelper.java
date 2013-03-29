@@ -25,10 +25,10 @@ public class ImageHelper {
 	private List<File> getImages(final File file, final File dir) {
 		int result = helper.extractImages(file, dir);
 		if (result>0) {
-			helper.convertPpmToJpg(dir);
+			result = helper.convertPpmToJpg(dir);
 		}
 		System.out.println("result "+result);
-		List<File> files = helper.listImages(dir, true);
+		List<File> files = helper.listJpegImages(dir, true);
 		System.out.println("files: "+files);
 		return files;
 	}
