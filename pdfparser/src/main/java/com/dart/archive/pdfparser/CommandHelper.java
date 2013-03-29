@@ -44,6 +44,7 @@ public class CommandHelper {
 				e.printStackTrace();
 			}
 			System.out.println(" --> "+result+ " " + dest.exists());
+			FileUtils.deleteQuietly(file);
 		}
 		return result;
 	}

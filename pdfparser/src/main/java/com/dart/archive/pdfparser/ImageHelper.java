@@ -24,10 +24,9 @@ public class ImageHelper {
 	
 	private List<File> getImages(final File file, final File dir) {
 		int result = helper.extractImages(file, dir);
-//no need to convert to jpg anymore
-//		if (result>0) {
-//			helper.convertPpmToJpg(dir);
-//		}
+		if (result>0) {
+			helper.convertPpmToJpg(dir);
+		}
 		System.out.println("result "+result);
 		List<File> files = helper.listImages(dir, true);
 		System.out.println("files: "+files);
