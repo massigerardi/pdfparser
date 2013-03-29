@@ -18,7 +18,7 @@ import com.dart.archive.pdfparser.model.Image;
  */
 public class ImageHelper {
 	
-	private CommandHelper helper;
+	private CommandHelper helper = new CommandHelper();
 	
 	private List<File> images;
 	

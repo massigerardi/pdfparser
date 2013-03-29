@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.ArrayUtils;
 
 public class CommandHelper {
 
@@ -42,14 +41,12 @@ public class CommandHelper {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			System.out.println(" --> "+result+ " " + dest.exists());
 			FileUtils.deleteQuietly(file);
 		}
 		return result;
 	}
 
 	public int runCommand(String... args) throws InterruptedException, IOException {
-		System.out.println("running "+ArrayUtils.toString(args));
 		return new ProcessBuilder(args).start().waitFor();
 	}
 	
