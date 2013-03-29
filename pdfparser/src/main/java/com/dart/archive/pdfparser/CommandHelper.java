@@ -12,7 +12,7 @@ import org.apache.commons.lang.ArrayUtils;
 public class CommandHelper {
 
 	private static final String PDFIMAGES_COMMAND = "pdfimages";
-	private static final String PNMTOJPEG_COMMAND = "pnmtojpeg";
+	private static final String IMAGEMAGICK_COMMAND = "convert";	
 
 	public int extractImages(final File src, final File dest) {
 		if (!dest.exists()) {
@@ -37,7 +37,7 @@ public class CommandHelper {
 		for (File file : files) {
 			File dest = new File(file.getParent(), FilenameUtils.getBaseName(file.getName()) + ".jpg");
 			try {
-				result += runCommand(PNMTOJPEG_COMMAND, file.getAbsolutePath()+ " > " + dest.getAbsolutePath());
+				result += runCommand(IMAGEMAGICK_COMMAND, file.getAbsolutePath(), dest.getAbsolutePath());
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
