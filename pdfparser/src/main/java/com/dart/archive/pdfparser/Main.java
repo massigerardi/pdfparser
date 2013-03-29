@@ -69,7 +69,7 @@ public class Main {
 		System.out.println("parsing "+src.getAbsolutePath()+" in "+folder.getAbsolutePath());
 		reader = new ITextPdfDocumentReader();
 		try {
-			PdfDocument document = reader.getPages(src.getAbsolutePath(), folder.getAbsolutePath(), true, true);
+			PdfDocument document = reader.getPages(src, folder, true, true);
 			System.out.println("parsed "+document.getPages().size()+" pages for document "+src.getName()+" in "+folder.getAbsolutePath());
 		} catch (DocumentException e) {
 			System.err.println("error while parsing "+src.getName());

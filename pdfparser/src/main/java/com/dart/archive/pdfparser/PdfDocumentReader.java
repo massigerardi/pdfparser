@@ -1,5 +1,7 @@
 package com.dart.archive.pdfparser;
 
+import java.io.File;
+
 import com.dart.archive.pdfparser.model.PdfDocument;
 import com.itextpdf.text.DocumentException;
 
@@ -15,6 +17,6 @@ public interface PdfDocumentReader {
 	
 	 */
 
-	public PdfDocument getPages(String src, String dest, boolean writeText, boolean writeImage) throws DocumentException;
+	public PdfDocument getPages(File src, File dest, boolean writeText, boolean writeImage) throws DocumentException;
 
 }
