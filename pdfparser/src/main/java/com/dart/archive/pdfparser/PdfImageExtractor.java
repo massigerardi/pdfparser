@@ -29,7 +29,7 @@ public class PdfImageExtractor {
 		} else if (action.equalsIgnoreCase("do")) {
 			int result = helper.extractImages(pdf, dest);
 			System.out.println(result);
-			if (result>0) {
+			if (result>-1) {
 				int result2 = helper.convertPpmToJpg(dest);
 				System.out.println(result2);
 			}

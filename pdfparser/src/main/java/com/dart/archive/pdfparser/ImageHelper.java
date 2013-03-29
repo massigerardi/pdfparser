@@ -24,7 +24,7 @@ public class ImageHelper {
 	
 	private List<File> getImages(final File file, final File dir) {
 		int result = helper.extractImages(file, dir);
-		if (result>0) {
+		if (result>-1) {
 			result = helper.convertPpmToJpg(dir);
 		}
 		System.out.println("result "+result);
