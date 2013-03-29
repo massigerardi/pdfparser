@@ -15,9 +15,14 @@ public class CommandHelper {
 	private static final String PNMTOJPEG_COMMAND = "pnmtojpeg";
 
 	public int extractImages(final File src, final File dest) {
-		System.out.println("running "+PDFIMAGES_COMMAND+" -p "+src.getAbsolutePath() +" "+ dest.getAbsolutePath());
+		if (!dest.exists()) {
+			dest.mkdirs();
+		}
+		String pdfName = FilenameUtils.getBaseName(src.getName());
+		File destination = new File(dest, pdfName);
+		System.out.println("running "+PDFIMAGES_COMMAND+" -p "+src.getAbsolutePath() +" "+ destination.getAbsolutePath());
 		try {
-			return runCommand(PDFIMAGES_COMMAND, "-p", src.getAbsolutePath(), dest.getAbsolutePath());
+			return runCommand(PDFIMAGES_COMMAND, "-p", src.getAbsolutePath(), destination.getAbsolutePath());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
