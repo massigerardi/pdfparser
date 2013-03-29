@@ -6,7 +6,10 @@ package com.dart.archive.pdfparser;
 import java.io.File;
 import java.util.Collection;
 
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.dart.archive.pdfparser.model.PdfDocument;
@@ -62,11 +65,11 @@ public class Main {
 	}
 
 	private static void readFile(File src, File dest) {
-		File folder = new File(dest, StringUtils.remove(src.getName(), ".pdf"));
+		File folder = new File(dest, FilenameUtils.getBaseName(src.getName()));
 		System.out.println("parsing "+src.getAbsolutePath()+" in "+folder.getAbsolutePath());
-		reader = new ITextPdfDocumentReader(folder.getAbsolutePath());
+		reader = new ITextPdfDocumentReader();
 		try {
-			PdfDocument document = reader.getPages(src.getAbsolutePath());
+			PdfDocument document = reader.getPages(src.getAbsolutePath(), folder.getAbsolutePath(), true, true);
 			System.out.println("parsed "+document.getPages().size()+" pages for document "+src.getName()+" in "+folder.getAbsolutePath());
 		} catch (DocumentException e) {
 			System.err.println("error while parsing "+src.getName());
