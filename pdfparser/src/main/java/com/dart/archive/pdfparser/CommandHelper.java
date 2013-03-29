@@ -57,6 +57,10 @@ public class CommandHelper {
 		return new ArrayList<File>(FileUtils.listFiles(dir, new String[] {"jpg", "JPG", "JPEG", "jpeg"}, recursive));
 	}
 	
+	public List<File> listImages(File dir, boolean recursive) {
+		return new ArrayList<File>(FileUtils.listFiles(dir, new String[] {"jpg", "JPG", "JPEG", "jpeg", "ppm", "PPM"}, recursive));
+	}
+	
 	public List<File> listPpmImages(File dir, boolean recursive) {
 		return new ArrayList<File>(FileUtils.listFiles(dir, new String[] {"ppm", "PPM"}, recursive));
 	}
