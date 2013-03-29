@@ -3,8 +3,10 @@
  */
 package com.dart.archive.pdfparser;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +57,7 @@ public class ITextPdfDocumentReader implements PdfDocumentReader {
 			List<File> files = new ArrayList<File>();
 			if (writeImage) {
 				files = extractImages(file, outputDir);
+				System.out.println("files: "+files);
 			}
 			
 			for (int i = 1; i <= reader.getNumberOfPages(); i++) {
@@ -79,7 +82,7 @@ public class ITextPdfDocumentReader implements PdfDocumentReader {
 		List<Image> images = new ArrayList<Image>();
 		for (File file : files) {
 			if (file.getName().startsWith(name+"-"+StringUtils.leftPad(String.valueOf(pageNumber), 3, '0'))) {
-				images.add(new Image(FilenameUtils.getBaseName(file.getName()), file.getAbsolutePath()));
+
 			}
 		}
 		return images;
@@ -87,6 +90,7 @@ public class ITextPdfDocumentReader implements PdfDocumentReader {
 
 	private List<File> extractImages(File file, String outputDir) {
 		String name = FilenameUtils.getBaseName(file.getName());
+		Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 		try {
 			extracyImages(file, outputDir, name);
 			convertImages(outputDir);
@@ -95,43 +99,27 @@ public class ITextPdfDocumentReader implements PdfDocumentReader {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		return new ArrayList<File>(FileUtils.listFiles(new File(outputDir), new String[] {"jpg", "JPG", "JPEG", "jpeg"}, true));
+		Thread.currentThread().setPriority(Thread.NORM_PRIORITY);
+		List<File> files = new ArrayList<File>(FileUtils.listFiles(new File(outputDir), new String[] {"jpg", "JPG", "JPEG", "jpeg"}, true));
+		System.out.println("files: "+files);
+		return files;
 	}
 
-	private void convertImages(String outputDir) {
+	private void convertImages(String outputDir) throws InterruptedException, IOException {
 		List<File> files = new ArrayList<File>(FileUtils.listFiles(new File(outputDir), new String[] {"ppm", "PPM"}, true));
 		for (File file : files) {
 			File dest = new File(file.getParent(), FilenameUtils.getBaseName(file.getName()) + ".jpg");
-			StringBuffer args = new StringBuffer();
-			args.append(file.getAbsolutePath()).append(" > ").append(dest.getAbsolutePath());
-			Process process;
-			try {
-				process = new ProcessBuilder(pnmtojpeg , args.toString()).start();
-				int result = process.waitFor();
-				if (result!=0) {
-					System.out.println("failed converting "+file.getAbsolutePath());
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			System.out.print("running "+pnmtojpeg+" "+file.getAbsolutePath() + " > " + dest.getAbsolutePath());
+			int result = new ProcessBuilder(pnmtojpeg, file.getAbsolutePath()+ " > " + dest.getAbsolutePath()).start().waitFor();
+			System.out.println(" --> "+result+ " " + dest.exists());
 		}
 	}
 
 	private void extracyImages(File file, String outputDir, String name) throws IOException, InterruptedException {
 		File dest = new File(outputDir, name);
-		StringBuffer args = new StringBuffer();
-		args.append(" -p ").append(file.getAbsolutePath()).append(" ").append(dest.getAbsolutePath());
-		System.out.println("running "+pdfimages+" "+args);
-		Process process = new ProcessBuilder(pdfimages , args.toString()).start();
-		int result = process.waitFor();
-		if (result!=0) {
-			throw new IOException("error while extracting images");
-		}
-		
+		System.out.println("running "+pdfimages+" -p "+file.getAbsolutePath() +" "+ dest.getAbsolutePath());
+		int result = new ProcessBuilder(pdfimages, "-p", file.getAbsolutePath(), dest.getAbsolutePath()).start().waitFor();
+		System.out.println(result);
 	}
 
 }

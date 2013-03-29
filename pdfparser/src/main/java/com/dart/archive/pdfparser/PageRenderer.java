@@ -73,8 +73,8 @@ public class PageRenderer extends SimpleTextExtractionStrategy {
 		}
         if (image == null) return;
     	
-        String filename = String.format(IMAGE_NAME, name, StringUtils.leftPad(String.valueOf(page.getPageNumber()), 3, '0'), renderInfo.getRef().getNumber(), image.getFileType());
-    	String filePath = writeImage(filename, image);
+        //String filename = String.format(IMAGE_NAME, name, StringUtils.leftPad(String.valueOf(page.getPageNumber()), 3, '0'), renderInfo.getRef().getNumber(), image.getFileType());
+    	//String filePath = writeImage(filename, image);
         //page.addImage(new Image(filename, filePath));
     }
 

@@ -39,7 +39,7 @@ public class ITextPdfDocumentReaderTest {
 	@After
 	public void clean() throws IOException {
 		reader = null;
-		FileUtils.deleteDirectory(new File(destinationDir));
+//		FileUtils.deleteDirectory(new File(destinationDir));
 	}
 	
 	/**

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite failures="1" time="15.327" errors="0" skipped="0" tests="2" name="com.dart.archive.pdfparser.ITextPdfDocumentReaderTest">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="/var/lib/jenkins/tools/JDK/Java_SE_1.6.0/jre/lib/amd64"/>
+    <property name="java.vm.version" value="20.9-b04"/>
+    <property name="java.vm.vendor" value="Sun Microsystems Inc."/>
+    <property name="java.vendor.url" value="http://java.sun.com/"/>
+    <property name="path.separator" value=":"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="test" value="ITextPdfDocumentReaderTest"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="/home/dart/pdfparser/pdfparser"/>
+    <property name="java.runtime.version" value="1.6.0_34-b04"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="/var/lib/jenkins/tools/JDK/Java_SE_1.6.0/jre/lib/endorsed"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="os.name" value="Linux"/>
+    <property name="classworlds.conf" value="/usr/share/maven/bin/m2.conf"/>
+    <property name="sun.jnu.encoding" value="ANSI_X3.4-1968"/>
+    <property name="java.library.path" value="/var/lib/jenkins/tools/JDK/Java_SE_1.6.0/jre/lib/amd64/server:/var/lib/jenkins/tools/JDK/Java_SE_1.6.0/jre/lib/amd64:/var/lib/jenkins/tools/JDK/Java_SE_1.6.0/jre/../lib/amd64:/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="50.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="3.4.4-guest"/>
+    <property name="user.home" value="/home/dart"/>
+    <property name="user.timezone" value="Europe/Berlin"/>
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
+    <property name="file.encoding" value="ANSI_X3.4-1968"/>
+    <property name="java.specification.version" value="1.6"/>
+    <property name="user.name" value="dart"/>
+    <property name="java.class.path" value="/usr/share/maven/boot/plexus-classworlds-2.x.jar"/>
+    <property name="java.vm.specification.version" value="1.0"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="/var/lib/jenkins/tools/JDK/Java_SE_1.6.0/jre"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean install -Dtest=ITextPdfDocumentReaderTest"/>
+    <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="user.language" value="en"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.6.0_34"/>
+    <property name="java.ext.dirs" value="/var/lib/jenkins/tools/JDK/Java_SE_1.6.0/jre/lib/ext:/usr/java/packages/lib/ext"/>
+    <property name="securerandom.source" value="file:/dev/./urandom"/>
+    <property name="sun.boot.class.path" value="/var/lib/jenkins/tools/JDK/Java_SE_1.6.0/jre/lib/resources.jar:/var/lib/jenkins/tools/JDK/Java_SE_1.6.0/jre/lib/rt.jar:/var/lib/jenkins/tools/JDK/Java_SE_1.6.0/jre/lib/sunrsasign.jar:/var/lib/jenkins/tools/JDK/Java_SE_1.6.0/jre/lib/jsse.jar:/var/lib/jenkins/tools/JDK/Java_SE_1.6.0/jre/lib/jce.jar:/var/lib/jenkins/tools/JDK/Java_SE_1.6.0/jre/lib/charsets.jar:/var/lib/jenkins/tools/JDK/Java_SE_1.6.0/jre/lib/modules/jdk.boot.jar:/var/lib/jenkins/tools/JDK/Java_SE_1.6.0/jre/classes"/>
+    <property name="java.vendor" value="Sun Microsystems Inc."/>
+    <property name="maven.home" value="/usr/share/maven"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.cpu.isalist" value=""/>
+  </properties>
+  <testcase time="3.267" classname="com.dart.archive.pdfparser.ITextPdfDocumentReaderTest" name="testExtractImagesNoWrite"/>
+  <testcase time="11.892" classname="com.dart.archive.pdfparser.ITextPdfDocumentReaderTest" name="testExtractImagesWrite">
+    <failure message="number of images expected:&lt;58&gt; but was:&lt;0&gt;" type="java.lang.AssertionError">java.lang.AssertionError: number of images expected:&lt;58&gt; but was:&lt;0&gt;
+	at org.junit.Assert.fail(Assert.java:93)
+	at org.junit.Assert.failNotEquals(Assert.java:647)
+	at org.junit.Assert.assertEquals(Assert.java:128)
+	at org.junit.Assert.assertEquals(Assert.java:472)
+	at com.dart.archive.pdfparser.ITextPdfDocumentReaderTest.testExtractImagesWrite(ITextPdfDocumentReaderTest.java:99)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+</failure>
+    <system-out>running pdfimages -p /home/dart/pdfparser/pdfparser/src/test/resources/learmidellarte.pdf /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte
+0
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-049-055.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-049-055.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-018-006.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-018-006.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-024-013.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-024-013.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-037-033.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-037-033.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-032-027.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-032-027.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-036-032.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-036-032.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-015-002.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-015-002.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-048-053.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-048-053.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-032-025.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-032-025.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-021-009.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-021-009.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-038-034.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-038-034.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-027-020.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-027-020.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-020-008.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-020-008.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-017-004.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-017-004.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-033-029.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-033-029.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-018-005.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-018-005.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-028-021.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-028-021.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-046-049.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-046-049.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-026-017.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-026-017.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-022-010.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-022-010.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-045-047.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-045-047.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-026-018.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-026-018.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-047-050.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-047-050.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-024-014.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-024-014.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-044-044.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-044-044.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-044-046.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-044-046.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-024-012.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-024-012.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-048-054.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-048-054.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-016-003.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-016-003.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-032-026.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-032-026.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-023-011.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-023-011.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-038-035.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-038-035.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-044-045.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-044-045.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-048-052.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-048-052.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-047-051.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-047-051.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-049-056.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-049-056.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-041-041.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-041-041.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-019-007.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-019-007.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-025-016.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-025-016.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-034-030.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-034-030.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-040-038.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-040-038.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-040-037.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-040-037.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-063-057.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-063-057.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-026-019.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-026-019.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-041-040.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-041-040.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-002-000.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-002-000.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-031-024.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-031-024.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-042-042.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-042-042.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-035-031.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-035-031.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-029-022.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-029-022.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-030-023.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-030-023.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-046-048.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-046-048.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-032-028.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-032-028.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-024-015.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-024-015.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-039-036.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-039-036.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-043-043.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-043-043.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-006-001.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-006-001.jpg --&gt; 1 false
+running pnmtojpeg /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-041-039.ppm &gt; /home/dart/pdfparser/pdfparser/target/learmidellarte/learmidellarte-041-039.jpg --&gt; 1 false
+files: []
+files: []
+</system-out>
+  </testcase>
+</testsuite>
